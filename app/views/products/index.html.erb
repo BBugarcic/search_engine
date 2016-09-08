@@ -16,7 +16,7 @@
       <% @products.each do |product| %>
         <tr>
           <td><%= product.name %></td>
-          <td><%= product.price %></td>
+          <td><%= product.price.to_f / 100 %></td>
           <td><%= product.all_descriptions %></td>
           <td><%= link_to 'Show', product %></td>
           <td><%= link_to 'Edit', edit_product_path(product) %></td>

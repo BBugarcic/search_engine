@@ -50,7 +50,7 @@ class ProductsController < ApplicationController
   # POST /products
   # POST /products.json
   def create
-    updated_params = add_price_category(product_params)
+    updated_params = format_price(product_params)
 
     @product = Product.new(updated_params)
 
@@ -100,15 +100,21 @@ class ProductsController < ApplicationController
       params.require(:product).permit(:name, :price, :all_descriptions, :category)
     end
 
-    def add_price_category(submited_params)
-      if (product_params[:price].to_i <= 2) then
-        submited_params[:price_category] = 0
-      elsif (product_params[:price].to_i > 2 && product_params[:price].to_i <= 4 ) then
-        submited_params[:price_category] = 1
+    def format_price(submitted_params)
+      params = convert_price_to_cents(submitted_params)
+      if (params[:price].to_f <= 2) then
+        params[:price_category] = 0
+      elsif (params[:price].to_f > 2 && params[:price].to_f <= 4 ) then
+        params[:price_category] = 1
       else
-        submited_params[:price_category] = 2
+        params[:price_category] = 2
       end
 
-      submited_params
+      params
+    end
+
+    def convert_price_to_cents(submitted_params)
+      submitted_params[:price] = submitted_params[:price].to_f * 100 #convert to cents
+      submitted_params
     end
 end

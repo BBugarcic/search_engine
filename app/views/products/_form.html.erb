@@ -18,7 +18,11 @@
 
   <div class="field">
     <%= f.label :price %>
-    <%= f.number_field :price %>
+    <% if controller.controller_name == "products" && controller.action_name == "edit" %>
+      <%= f.text_field :price, :value => f.object.price.to_f / 100 %><br>
+    <% else %>
+      <%= f.text_field :price %><br>
+    <% end %>
   </div>
 
   <div class="field">

@@ -7,7 +7,7 @@
 
 <p>
   <strong>Price:</strong>
-  <%= @product.price %>
+  <%= @product.price.to_f / 100 %>
 </p>
 
   <p>
@@ -33,7 +33,7 @@
         <tr>
           <td><%= similar_product.name %></td>
           <td><%= similarity.round(2) %>%</td>
-          <td><%= similar_product.price %></td>
+          <td><%= similar_product.price.to_f/100 %></td>
           <td><%= similar_product.all_descriptions %></td>
           <td><%= link_to 'Show', similar_product %></td>
         </tr>
