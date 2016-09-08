@@ -1,0 +1,46 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Name:</strong>
+  <%= @product.name %>
+</p>
+
+<p>
+  <strong>Price:</strong>
+  <%= @product.price %>
+</p>
+
+  <p>
+  <strong>Attributes:</strong>
+  </p>
+  <ul>
+    <% @product.descriptions.each do |description| %>
+     <li><%= description.label %> &sup<%= description.products.length %></li>
+    <%end%>
+  </ul>
+ <table class="col-md-12">
+    <thead>
+      <tr>
+        <th>Similar products</th>
+        <th>Similarity</th>
+        <th>Price</th>
+        <th>Attributes</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @similar_products_and_similarity.each do |similar_product, similarity| %>
+        <tr>
+          <td><%= similar_product.name %></td>
+          <td><%= similarity.round(2) %>%</td>
+          <td><%= similar_product.price %></td>
+          <td><%= similar_product.all_descriptions %></td>
+          <td><%= link_to 'Show', similar_product %></td>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+  <div class="row col-md-12">
+    <br>
+    <%= link_to 'Back', products_path %>
+  </div>
